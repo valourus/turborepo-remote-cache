@@ -19,7 +19,7 @@ export const putArtifact: RouteOptions<
   schema: artifactsRouteSchema,
   async handler(req, reply) {
     const artifactId = req.params.id
-    const teamId = req.query.teamId
+    const teamId = req.query.teamId || req.query.slug;
     try {
       await this.location.createCachedArtifact(artifactId, teamId, Readable.from(req.body))
 
