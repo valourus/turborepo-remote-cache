@@ -1,8 +1,8 @@
-import type { Server } from 'http'
-import type { RouteOptions, RawRequestDefaultExpression, RawReplyDefaultExpression } from 'fastify'
 import { preconditionFailed } from '@hapi/boom'
+import type { RawReplyDefaultExpression, RawRequestDefaultExpression, RouteOptions } from 'fastify'
+import type { Server } from 'http'
 import { Readable } from 'stream'
-import { type Querystring, type Params, artifactsRouteSchema } from './schema'
+import { artifactsRouteSchema, type Params, type Querystring } from './schema'
 
 export const putArtifact: RouteOptions<
   Server,
@@ -19,7 +19,7 @@ export const putArtifact: RouteOptions<
   schema: artifactsRouteSchema,
   async handler(req, reply) {
     const artifactId = req.params.id
-    const teamId = req.query.teamId || req.query.slug;
+    const teamId = req.query.teamId || req.query.slug
     try {
       await this.location.createCachedArtifact(artifactId, teamId, Readable.from(req.body))
 
